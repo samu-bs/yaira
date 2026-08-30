@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalia · Semana 1</title>
+<style>
+  :root {
+    --ink: #1e3a5f;
+    --accent: #c2410c;
+    --accent-soft: #fff5ed;
+    --green: #0f766e;
+    --green-soft: #f0fdfa;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+    --gray-900: #0f172a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+    color: var(--gray-900);
+    font-size: 16px;
+    line-height: 1.6;
+    background: #fafafa;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 16px 60px; }
+
+  .backlink { display: inline-block; color: var(--gray-500); font-size: 13px; text-decoration: none; margin-bottom: 18px; }
+  .backlink:hover { color: var(--accent); }
+
+  .hero { padding: 8px 0 24px; border-bottom: 1px solid var(--gray-200); margin-bottom: 32px; }
+  .hero .eyebrow { color: var(--gray-500); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { color: var(--ink); font-size: 38px; line-height: 1.1; margin-bottom: 8px; }
+  .hero .accent-bar { width: 50px; height: 4px; background: var(--accent); margin: 14px 0 18px; }
+  .hero .lead { color: var(--gray-700); font-size: 15px; max-width: 560px; }
+
+  h2 { font-size: 21px; color: var(--ink); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  h3 { font-size: 17px; color: var(--gray-900); margin-bottom: 8px; }
+  section { margin-bottom: 36px; }
+  p { margin-bottom: 10px; }
+  p:last-child { margin-bottom: 0; }
+
+  .card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    margin-bottom: 14px;
+  }
+  .card p { color: var(--gray-700); font-size: 14px; }
+  .card.green { border-left-color: var(--green); }
+  .card.quiet { border-left-color: var(--gray-300); }
+
+  .big-idea {
+    background: var(--accent-soft);
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+  .big-idea .label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  .big-idea p { font-size: 15px; color: var(--gray-900); }
+  .big-idea strong { color: var(--accent); }
+
+  ul, ol { margin: 0 0 10px 20px; }
+  li { color: var(--gray-700); font-size: 14px; margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; background: white; font-size: 14px; min-width: 520px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--gray-200); }
+  th { background: var(--gray-100); color: var(--ink); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.fill { background: var(--gray-50); color: var(--gray-300); }
+  tr:last-child td { border-bottom: none; }
+  .ex-name { font-weight: 600; color: var(--gray-900); }
+  .ex-en { display: block; font-size: 12.5px; color: var(--ink); font-weight: 600; margin-top: 3px; }
+  .ex-en a { color: var(--accent); font-weight: 700; text-decoration: none; margin-left: 6px; white-space: nowrap; }
+  .ex-en a:hover { text-decoration: underline; }
+  .ex-note { display: block; color: var(--gray-500); font-size: 12.5px; line-height: 1.45; margin-top: 3px; font-weight: 400; }
+
+  .session-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin: 24px 0 10px;
+  }
+  .pill {
+    background: var(--ink); color: white; font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;
+  }
+  .pill.soft { background: var(--gray-200); color: var(--gray-700); }
+  .session-head .when { color: var(--gray-500); font-size: 13px; }
+
+  .week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .day { background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px; text-align: center; }
+  .day .d { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-bottom: 4px; }
+  .day .w { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+  .day.strong { border-color: var(--accent); background: var(--accent-soft); }
+  .day.strong .w { color: var(--accent); }
+
+  .anchors { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .anchor { background: white; border: 1px solid var(--gray-200); border-top: 3px solid var(--green); border-radius: 8px; padding: 13px; }
+  .anchor .when { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-bottom: 5px; }
+  .anchor .what { font-size: 14px; color: var(--gray-900); font-weight: 600; margin-bottom: 4px; }
+  .anchor .g { font-size: 13px; color: var(--green); font-weight: 700; }
+
+  .footer {
+    margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--gray-200);
+    color: var(--gray-500); font-size: 13px; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <a class="backlink" href="index.html">← Volver</a>
+
+  <div class="hero">
+    <div class="eyebrow">Semana 1 · desde el lunes 31 de agosto</div>
+    <h1>Medir antes de empujar</h1>
+    <div class="accent-bar"></div>
+    <p class="lead">
+      Esta semana no vas a levantar más pesado. Vas a averiguar cuánto levantás
+      y vas a anotarlo. Suena poco. Es lo único que hace posible todo lo que viene después.
+    </p>
+  </div>
+
+  <section>
+    <div class="big-idea">
+      <div class="label">Lo que salió de la entrevista</div>
+      <p>
+        Entrenás cinco o seis veces por semana y sentís que no ves músculo.
+        Lo que encontramos no fue que te falte entrenamiento: fue que
+        <strong>de todo lo que hacés, solo dos días tienen carga de verdad</strong>,
+        que <strong>levantás los mismos pesos hace meses</strong>,
+        que <strong>no anotás nada</strong> — así que no hay forma de subir lo que no sabés cuánto era —
+        y que <strong>comés poco para lo que entrenás</strong>.
+      </p>
+    </div>
+    <div class="card quiet">
+      <h3>Tres cosas cambian, nada más</h3>
+      <ul>
+        <li>El pilates barre pasa a ser una tercera sesión de fuerza. <strong>La semana no se hace más larga.</strong></li>
+        <li>Anotás cada serie, cada repetición y cada peso. Todo.</li>
+        <li>Sumás proteína hasta llegar a unos 75 g por día.</li>
+      </ul>
+      <p style="margin-top:10px;"><strong>Nada se saca.</strong> El yoga queda, el dulce de la tarde queda, el picoteo queda. Esta semana solo se agrega.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Cómo queda la semana</h2>
+    <div class="week-grid">
+      <div class="day strong"><div class="d">Lun</div><div class="w">Fuerza A</div></div>
+      <div class="day"><div class="d">Mar</div><div class="w">Yoga</div></div>
+      <div class="day"><div class="d">Mié</div><div class="w">Libre</div></div>
+      <div class="day strong"><div class="d">Jue</div><div class="w">Fuerza B</div></div>
+      <div class="day"><div class="d">Vie</div><div class="w">Yoga</div></div>
+      <div class="day strong"><div class="d">Sáb</div><div class="w">Fuerza A</div></div>
+      <div class="day"><div class="d">Dom</div><div class="w">Check-in</div></div>
+    </div>
+    <div class="card quiet">
+      <p>
+        <strong>El yoga del martes y del viernes es fijo, y el miércoles es tu día bravo de trabajo.</strong>
+        La fuerza se acomodó alrededor de las dos cosas, no al revés. Si alguna semana necesitás
+        correr un día, corrélo: lo único que importa es que entre dos sesiones de fuerza
+        quede al menos un día de por medio.
+      </p>
+      <p><strong>Correr sigue afuera</strong>, hasta que te habiliten. Ese llamado no es mío.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2>La regla de esta semana</h2>
+    <div class="card green">
+      <h3>Buscá el peso que te deja 2 o 3 repeticiones en el bolsillo</h3>
+      <p>
+        En cada ejercicio, la serie tiene que terminar sintiendo que
+        <strong>podrías haber hecho dos o tres repeticiones más, pero no diez</strong>.
+        Si terminás como si nada, el peso es poco: subilo en la serie siguiente, ahí mismo.
+      </p>
+      <p>
+        Es probable que descubras que podés bastante más de lo que venías haciendo.
+        Eso es exactamente lo que vinimos a buscar.
+      </p>
+      <p style="margin-top:10px;">
+        <strong>Y anotalo.</strong> Peso, series y repeticiones de cada ejercicio.
+        En el teléfono, en un cuaderno, donde sea — pero que quede escrito.
+        Si usás una máquina, anotá también cuál: dos máquinas distintas con el mismo número
+        pueden diferir hasta un 20%.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Bloque A · lunes y sábado</h2>
+    <div class="session-head">
+      <span class="pill">Calentar</span>
+      <span class="when">8 minutos de bici fija, suave, subiendo de a poco. No se saltea.</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:46%">Ejercicio</th><th>Series</th><th>Reps</th><th>Peso que usaste</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ex-name">Prensa de piernas</span><span class="ex-en">Leg Press <a href="https://musclewiki.com/exercise/machine-leg-press?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">No bajes más allá de los 90° de rodilla. Si la máquina tiene tope regulable, ponelo. Empujá con el pie entero, sin despegar el talón.</span></td>
+            <td>3</td><td>8–10</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Press plano con mancuernas</span><span class="ex-en">Dumbbell Bench Press <a href="https://musclewiki.com/exercise/dumbbell-bench-press?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Bajá contando dos tiempos. Codos a 45° del cuerpo, no abiertos del todo. Anotá el peso por mancuerna.</span></td>
+            <td>3</td><td>8–10</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Remo sentada en polea</span><span class="ex-en">Seated Cable Row <a href="https://musclewiki.com/exercise/machine-seated-cable-row?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Llevá los codos hacia atrás, no las manos. Pecho arriba, sin balancear el tronco para ayudarte.</span></td>
+            <td>3</td><td>8–10</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Curl femoral</span><span class="ex-en">Lying Leg Curl <a href="https://musclewiki.com/exercise/machine-hamstring-curl?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Bajá el peso controlado, sin dejarlo caer. Equilibra el trabajo de cuádriceps y le da estabilidad a la rodilla.</span></td>
+            <td>3</td><td>10–12</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Elevaciones laterales</span><span class="ex-en">Dumbbell Lateral Raise <a href="https://musclewiki.com/exercise/dumbbell-lateral-raise?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Hasta la altura del hombro, no más arriba. Es el que más se nota a la vista.</span></td>
+            <td>2</td><td>12–15</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Plancha</span><span class="ex-en">Plank <a href="https://musclewiki.com/exercise/forearm-plank?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Anotá segundos. Cuando la cadera se cae, terminó la serie, aunque falten segundos.</span></td>
+            <td>3</td><td>20–40 s</td><td class="fill">— — —</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Bloque B · jueves</h2>
+    <div class="session-head">
+      <span class="pill">Calentar</span>
+      <span class="when">8 minutos de bici fija.</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th style="width:46%">Ejercicio</th><th>Series</th><th>Reps</th><th>Peso que usaste</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="ex-name">Peso muerto rumano con mancuernas</span><span class="ex-en">Dumbbell Romanian Deadlift <a href="https://musclewiki.com/exercise/dumbbell-romanian-deadlift?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">La rodilla casi no se dobla: llevá la cola hacia atrás, espalda plana, mancuernas pegadas a la pierna. Bajá hasta sentir el tirón atrás del muslo, no más. Este es el que en unas semanas pasa a la barra.</span></td>
+            <td>3</td><td>8–10</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Jalón al pecho</span><span class="ex-en">Lat Pulldown <a href="https://musclewiki.com/exercise/machine-pulldown?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Tirá con la espalda, no con los brazos. Hasta la clavícula, sin irte hacia atrás con el tronco.</span></td>
+            <td>3</td><td>8–10</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Press de hombro sentada con mancuernas</span><span class="ex-en">Seated Dumbbell Shoulder Press <a href="https://musclewiki.com/exercise/dumbbell-seated-overhead-press?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Con respaldo. Costillas abajo, sin arquear la zona lumbar para empujar.</span></td>
+            <td>3</td><td>8–10</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Extensión de rodilla</span><span class="ex-en">Leg Extension <a href="https://musclewiki.com/exercise/machine-leg-extension?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Arrancá deliberadamente liviano esta semana. <strong>Fijate si la pierna derecha puede menos que la izquierda y anotalo</strong> — esa diferencia es lo que hay que cerrar antes de volver a correr.</span></td>
+            <td>3</td><td>10–12</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Puente de glúteo con mancuerna</span><span class="ex-en">Dumbbell Glute Bridge <a href="https://musclewiki.com/exercise/dumbbell-glute-bridge?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Apretá arriba un segundo y aguantá. Exhalá al empujar, sin retener el aire a presión.</span></td>
+            <td>3</td><td>10–12</td><td class="fill">— — —</td>
+          </tr>
+          <tr>
+            <td><span class="ex-name">Curl de bíceps</span><span class="ex-en">Dumbbell Curl <a href="https://musclewiki.com/exercise/dumbbell-curl?model=f" target="_blank" rel="noopener">ver video ↗</a></span>
+              <span class="ex-note">Sin balancear el cuerpo. Si tenés que impulsarte, el peso es mucho.</span></td>
+            <td>2</td><td>10–12</td><td class="fill">— — —</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>Para cargarlo en Heavy</h2>
+    <div class="card quiet">
+      <p>Los nombres tal cual los vas a encontrar en la app:</p>
+      <p style="margin-top:12px;"><strong style="color:var(--ink);">Rutina A</strong></p>
+      <ul>
+        <li>Leg Press — 3 × 8-10</li>
+        <li>Dumbbell Bench Press — 3 × 8-10</li>
+        <li>Seated Cable Row — 3 × 8-10</li>
+        <li>Lying Leg Curl — 3 × 10-12</li>
+        <li>Dumbbell Lateral Raise — 2 × 12-15</li>
+        <li>Plank — 3 × 20-40 s</li>
+      </ul>
+      <p style="margin-top:12px;"><strong style="color:var(--ink);">Rutina B</strong></p>
+      <ul>
+        <li>Dumbbell Romanian Deadlift — 3 × 8-10</li>
+        <li>Lat Pulldown — 3 × 8-10</li>
+        <li>Seated Dumbbell Shoulder Press — 3 × 8-10</li>
+        <li>Leg Extension — 3 × 10-12</li>
+        <li>Dumbbell Glute Bridge — 3 × 10-12</li>
+        <li>Dumbbell Curl — 2 × 10-12</li>
+      </ul>
+      <p style="margin-top:12px;">
+        Si algún nombre no aparece igual en Heavy, buscá la palabra principal
+        —<em>press</em>, <em>row</em>, <em>curl</em>— y elegí la variante que se vea como el video.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Si llegás muerta</h2>
+    <div class="card quiet">
+      <p>
+        Hacé los <strong>tres primeros ejercicios del bloque, dos series cada uno</strong>. Veinticinco minutos y listo.
+      </p>
+      <p>
+        Media sesión anotada vale muchísimo más que una sesión completa que no ocurrió.
+        Esto no es hacer trampa: es entrenar bien un día malo.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>La comida: cuatro anclas</h2>
+    <div class="card green">
+      <p>
+        No vas a contar calorías ni usar ninguna app. La regla es una sola:
+        <strong>que en cuatro momentos del día haya algo con proteína.</strong>
+        Cuatro anclas de unos 20 gramos te dan 80 sin que tengas que sumar nada.
+      </p>
+    </div>
+    <div class="anchors">
+      <div class="anchor"><div class="when">Desayuno</div><div class="what">Lo que ya hacés + 2 huevos o medio pote de cottage</div><div class="g">~24 g</div></div>
+      <div class="anchor"><div class="when">Almuerzo</div><div class="what">Lata de atún sobre ensalada, con garbanzos</div><div class="g">~30 g</div></div>
+      <div class="anchor"><div class="when">Media tarde</div><div class="what">Un yogur griego. Y al lado, el dulce de siempre</div><div class="g">~15 g</div></div>
+      <div class="anchor"><div class="when">Cena · 21 h o más tarde</div><div class="what">Pescado a la plancha con verduras</div><div class="g">~30 g</div></div>
+    </div>
+    <div class="card">
+      <h3>Lo único que cambia de verdad</h3>
+      <ul>
+        <li>El almuerzo pasa de «a veces» a <strong>todos los días</strong>, y siempre con proteína.</li>
+        <li>La media tarde suma un ancla. <strong>El picoteo sigue</strong> — se le agrega algo al lado, no se lo reemplaza.</li>
+        <li>La cena lleva proteína, no solo verdura o hidratos.</li>
+      </ul>
+      <p style="margin-top:10px;">El desayuno queda como está. Ese ya lo hacés bien.</p>
+    </div>
+    <div class="card quiet">
+      <h3>Porciones de referencia</h3>
+      <ul>
+        <li>2 huevos — 13 g</li>
+        <li>Cottage 5%, medio pote de 250 g — 14 g</li>
+        <li>Yogur griego o skyr, 1 pote — 15 g</li>
+        <li>Gvina levana 5%, 100 g — 10 g</li>
+        <li>Atún en lata escurrido — 25 g</li>
+        <li>Salmón o pescado blanco, 150 g — 30 g</li>
+        <li>Sardinas en lata — 20 g</li>
+        <li>Lentejas o garbanzos cocidos, 1 taza — 15 a 18 g</li>
+        <li>Hummus, 100 g — 7 g <em>(rico, pero solo no alcanza como ancla)</em></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>Un ajuste gratis</h3>
+      <p>
+        Los suplementos que tomás a la mañana rinden distinto según con qué los tomes.
+        <strong>Te pasé por chat el detalle de cuál conviene mover y a qué hora.</strong>
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Una cosa para vigilar</h2>
+    <div class="card">
+      <p>
+        Volviste a todo de golpe el mismo día. Está bien, pero
+        <strong>fijate si la rodilla derecha se hincha en las 24 o 48 horas después de entrenar</strong>.
+        No el dolor mientras entrenás: la hinchazón después.
+      </p>
+      <p>
+        Si aparece, no significa que hiciste algo mal. Significa que hay que repartir
+        el mismo trabajo en más días. Avisame y lo acomodamos.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>El domingo, el check-in</h2>
+    <div class="card quiet">
+      <p>Escribime con esto y armo la semana 2:</p>
+      <ol>
+        <li>Los pesos que anotaste, ejercicio por ejercicio.</li>
+        <li>Cuántas de las tres sesiones hiciste.</li>
+        <li>Cómo venís con las cuatro anclas de proteína — sin porcentajes ni cumplimiento, solo cómo fue.</li>
+        <li>Energía del 1 al 10.</li>
+        <li>Cómo dormiste, comparado con tu normal.</li>
+        <li>Cómo se portó la rodilla.</li>
+        <li>Cualquier cosa que haya pasado: un viaje, una semana de quilombo, una molestia.</li>
+      </ol>
+    </div>
+  </section>
+
+  <div class="footer">
+    Semana 1 · escrita el 30 de agosto de 2026<br>
+    Valeria, con Flor y Lucía
+  </div>
+
+</div>
+
+</body>
+</html>

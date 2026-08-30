@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalia · Plan personal</title>
+<style>
+  :root {
+    --ink: #1e3a5f;
+    --accent: #c2410c;
+    --accent-soft: #fff5ed;
+    --green: #0f766e;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+    --gray-900: #0f172a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+    color: var(--gray-900);
+    font-size: 16px;
+    line-height: 1.6;
+    background: #fafafa;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 16px 60px; }
+
+  .hero { padding: 28px 0 24px; border-bottom: 1px solid var(--gray-200); margin-bottom: 32px; }
+  .hero .eyebrow { color: var(--gray-500); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { color: var(--ink); font-size: 38px; line-height: 1.1; margin-bottom: 8px; }
+  .hero .accent-bar { width: 50px; height: 4px; background: var(--accent); margin: 14px 0 18px; }
+  .hero .lead { color: var(--gray-700); font-size: 15px; max-width: 560px; }
+
+  h2 { font-size: 21px; color: var(--ink); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  section { margin-bottom: 36px; }
+
+  .card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  .card h3 { font-size: 17px; color: var(--gray-900); margin-bottom: 8px; }
+  .card p { color: var(--gray-700); font-size: 14px; margin-bottom: 10px; }
+  .card p:last-child { margin-bottom: 0; }
+  .card code {
+    background: var(--gray-100);
+    padding: 2px 7px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--accent);
+  }
+
+  .team { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+  .person { background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 13px; }
+  .person .name { font-weight: 700; color: var(--gray-900); font-size: 14px; }
+  .person .role { color: var(--gray-500); font-size: 12px; margin-top: 3px; }
+
+  .footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--gray-200);
+    color: var(--gray-500);
+    font-size: 13px;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <div class="hero">
+    <div class="eyebrow">Plan personal · 2026</div>
+    <h1>Dalia</h1>
+    <div class="accent-bar"></div>
+    <p class="lead">
+      Acá van a ir apareciendo tus planes semanales: qué entrenar, qué comer en líneas generales,
+      y en qué poner el foco. Se actualiza solo en tu celular.
+    </p>
+  </div>
+
+  <section>
+    <h2>Tus semanas</h2>
+    <div class="card">
+      <h3><a href="semana1.html" style="color:var(--accent); text-decoration:none;">Semana 1 · Medir antes de empujar →</a></h3>
+      <p>
+        Desde el lunes 31 de agosto. Tres sesiones de fuerza, la regla de calibración,
+        las cuatro anclas de proteína y qué traer al check-in del domingo.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Los dos objetivos</h2>
+    <div class="card">
+      <h3>1 · Setenta y cinco gramos de proteína por día</h3>
+      <p>
+        Es la palanca principal. Entrenás mucho y no le estás dando al cuerpo
+        con qué construir. Sin esto, levantar más pesado no produce nada.
+      </p>
+    </div>
+    <div class="card">
+      <h3>2 · Tres sesiones de fuerza, anotadas, con la carga subiendo</h3>
+      <p>
+        Hoy hacés dos, no anotás nada y levantás lo mismo hace meses.
+        No se puede subir lo que no sabés cuánto era.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Tu equipo</h2>
+    <div class="team">
+      <div class="person"><div class="name">Valeria Sosa</div><div class="role">Entrenadora principal · tu contacto</div></div>
+      <div class="person"><div class="name">Dra. Sofía Bergallo</div><div class="role">Medicina del deporte</div></div>
+      <div class="person"><div class="name">Dra. Carolina Ferrari</div><div class="role">Ginecología y salud hormonal</div></div>
+      <div class="person"><div class="name">Lucía Domínguez</div><div class="role">Nutrición</div></div>
+      <div class="person"><div class="name">Florencia Ibáñez</div><div class="role">Entrenamiento</div></div>
+      <div class="person"><div class="name">Mariano Kuperman</div><div class="role">Hábitos y adherencia</div></div>
+    </div>
+  </section>
+
+  <div class="footer">
+    Entrevista inicial hecha el 30 de agosto de 2026 · Semana 1 en marcha
+  </div>
+
+</div>
+
+</body>
+</html>
