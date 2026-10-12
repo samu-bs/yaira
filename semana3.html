@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dalia · Semana 3</title>
+<style>
+  :root {
+    --ink: #1e3a5f;
+    --accent: #c2410c;
+    --accent-soft: #fff5ed;
+    --green: #0f766e;
+    --green-soft: #f0fdfa;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-500: #64748b;
+    --gray-700: #334155;
+    --gray-900: #0f172a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, sans-serif;
+    color: var(--gray-900);
+    font-size: 16px;
+    line-height: 1.6;
+    background: #fafafa;
+    min-height: 100vh;
+  }
+  .container { max-width: 720px; margin: 0 auto; padding: 32px 16px 60px; }
+
+  .backlink { display: inline-block; color: var(--gray-500); font-size: 13px; text-decoration: none; margin-bottom: 18px; }
+  .backlink:hover { color: var(--accent); }
+
+  .hero { padding: 8px 0 24px; border-bottom: 1px solid var(--gray-200); margin-bottom: 32px; }
+  .hero .eyebrow { color: var(--gray-500); font-size: 13px; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px; }
+  .hero h1 { color: var(--ink); font-size: 38px; line-height: 1.1; margin-bottom: 8px; }
+  .hero .accent-bar { width: 50px; height: 4px; background: var(--accent); margin: 14px 0 18px; }
+  .hero .lead { color: var(--gray-700); font-size: 15px; max-width: 560px; }
+
+  h2 { font-size: 21px; color: var(--ink); margin-bottom: 14px; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  h3 { font-size: 17px; color: var(--gray-900); margin-bottom: 8px; }
+  section { margin-bottom: 36px; }
+  p { margin-bottom: 10px; }
+  p:last-child { margin-bottom: 0; }
+
+  .card {
+    background: white;
+    border: 1px solid var(--gray-200);
+    border-left: 4px solid var(--accent);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    margin-bottom: 14px;
+  }
+  .card p { color: var(--gray-700); font-size: 14px; }
+  .card.green { border-left-color: var(--green); }
+  .card.quiet { border-left-color: var(--gray-300); }
+
+  .big-idea {
+    background: var(--accent-soft);
+    border: 1px solid #fed7aa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 18px;
+  }
+  .big-idea .label { font-size: 12px; letter-spacing: 1px; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 6px; }
+  .big-idea p { font-size: 15px; color: var(--gray-900); }
+  .big-idea strong { color: var(--accent); }
+
+  ul, ol { margin: 0 0 10px 20px; }
+  li { color: var(--gray-700); font-size: 14px; margin-bottom: 6px; }
+  li:last-child { margin-bottom: 0; }
+
+  .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; margin-bottom: 14px; }
+  table { width: 100%; border-collapse: collapse; background: white; font-size: 14px; min-width: 520px; }
+  th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--gray-200); }
+  th { background: var(--gray-100); color: var(--ink); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  td.fill { background: var(--gray-50); color: var(--gray-300); }
+  tr:last-child td { border-bottom: none; }
+  .ex-name { font-weight: 600; color: var(--gray-900); }
+  .ex-en { display: block; font-size: 12.5px; color: var(--ink); font-weight: 600; margin-top: 3px; }
+  .ex-en a { color: var(--accent); font-weight: 700; text-decoration: none; margin-left: 6px; white-space: nowrap; }
+  .ex-en a:hover { text-decoration: underline; }
+  .ex-note { display: block; color: var(--gray-500); font-size: 12.5px; line-height: 1.45; margin-top: 3px; font-weight: 400; }
+  .up { color: var(--accent); font-weight: 700; }
+  .new { display: inline-block; background: var(--green); color: white; font-size: 10.5px; font-weight: 700; padding: 1px 6px; border-radius: 10px; letter-spacing: 0.5px; margin-left: 6px; vertical-align: middle; }
+
+  .session-head {
+    display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;
+    margin: 24px 0 10px;
+  }
+  .pill {
+    background: var(--ink); color: white; font-size: 12px; font-weight: 700;
+    padding: 3px 10px; border-radius: 20px; letter-spacing: 0.5px;
+  }
+  .pill.soft { background: var(--gray-200); color: var(--gray-700); }
+  .pill.run { background: var(--green); }
+  .session-head .when { color: var(--gray-500); font-size: 13px; }
+
+  .week-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(84px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .day { background: white; border: 1px solid var(--gray-200); border-radius: 8px; padding: 10px; text-align: center; }
+  .day .d { font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-bottom: 4px; }
+  .day .w { font-size: 13px; font-weight: 600; color: var(--gray-900); }
+  .day.strong { border-color: var(--accent); background: var(--accent-soft); }
+  .day.strong .w { color: var(--accent); }
+  .day.run { border-color: var(--green); background: var(--green-soft); }
+  .day.run .w { color: var(--green); }
+
+  .anchors { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; margin-bottom: 14px; }
+  .anchor { background: white; border: 1px solid var(--gray-200); border-top: 3px solid var(--green); border-radius: 8px; padding: 13px; }
+  .anchor .when { font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: var(--gray-500); margin-bottom: 5px; }
+  .anchor .what { font-size: 14px; color: var(--gray-900); font-weight: 600; margin-bottom: 4px; }
+  .anchor .g { font-size: 13px; color: var(--green); font-weight: 700; }
+
+  .footer {
+    margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--gray-200);
+    color: var(--gray-500); font-size: 13px; text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <a class="backlink" href="index.html">← Volver</a>
+
+  <div class="hero">
+    <div class="eyebrow">Semana 3 · desde el lunes 12 de octubre</div>
+    <h1>Correr vuelve, y la comida sube</h1>
+    <div class="accent-bar"></div>
+    <p class="lead">
+      Mientras no me escribías, entrenaste: con las fiestas de por medio, 14 sesiones
+      anotadas en Hevy, sin que nadie te lo pidiera. Con esos números armo esta semana:
+      entran las dos corridas que pediste, entran la sentadilla y la estocada, y el foco
+      de la semana pasa a ser comer.
+    </p>
+  </div>
+
+  <section>
+    <h2>Lo que muestran tus números</h2>
+
+    <div class="card green">
+      <h3>Seguiste subiendo mientras nadie miraba</h3>
+      <p>
+        Press plano de 7 a 8 kg por mano, press de hombro de 7 a 8, peso muerto rumano de 7 a 9,
+        hip thrust de 14 a 20 kg. Y las 14 sesiones están anotadas, con series, repeticiones y cargas.
+        El hábito que armamos en la semana 1 sigue andando solo.
+      </p>
+    </div>
+
+    <div class="card quiet">
+      <h3>Lo que se quedó clavado</h3>
+      <p>
+        Cuando el mismo peso sale igual tres sesiones seguidas, es hora de subir. Esta semana suben:
+        la extensión de rodilla (35 kg, cinco sesiones iguales), el curl femoral (20 kg, cuatro),
+        el remo en polea (27,5 kg, siete), las elevaciones laterales (4 kg, seis) y el press plano,
+        el peso muerto rumano y el hip thrust, que ya te sobraban repeticiones.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lo que pediste</h2>
+
+    <div class="big-idea">
+      <div class="label">Correr</div>
+      <p>
+        Dos veces por semana, <strong>hasta 6 km</strong>: ese es el límite que te dio tu kinesióloga.
+        Los 10 km no esta semana. Ni esta ni la que viene.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Por qué 6 y no 10</h3>
+      <p>
+        Primero, porque 6 km es lo que te habilitaron. No me corresponde pasarme de lo que dijo ella.
+      </p>
+      <p>
+        Segundo, porque corrés dos veces más por semana, entrenás con pesas, hacés yoga,
+        y el peso viene bajando. Sumar kilómetros sin sumar comida es lo contrario de lo que
+        te trajo hasta acá: queremos más músculo, y el músculo se construye comiendo.
+        Cuando el peso se estabilice tres semanas seguidas y tu kinesióloga te habilite por escrito,
+        hablamos de más distancia.
+      </p>
+    </div>
+
+    <div class="card">
+      <h3>Qué cambia a cambio</h3>
+      <ul>
+        <li><strong>Los 20 minutos de bici después del gimnasio salen.</strong> La bici queda como entrada en calor, 8 a 10 minutos y nada más.</li>
+        <li><strong>Tres corridas por semana no.</strong> Dos.</li>
+        <li><strong>La semana tiene siete sesiones y ningún día libre,</strong> como elegiste. Los dos yoga son los días suaves. Lo probamos dos semanas y lo miramos.</li>
+      </ul>
+    </div>
+
+    <div class="big-idea">
+      <div class="label">Sentadilla y estocada</div>
+      <p>
+        Tenías razón: no estaban. No fue un olvido, las dejé afuera por la rodilla. Ahora entran:
+        <strong>sentadilla goblet a un cajón</strong> y <strong>estocada hacia atrás corta</strong>,
+        las dos con un tope: la rodilla no baja más allá de los 90°.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>La semana</h2>
+    <div class="week-grid">
+      <div class="day strong"><div class="d">Lunes</div><div class="w">Rutina A</div></div>
+      <div class="day"><div class="d">Martes</div><div class="w">Yoga</div></div>
+      <div class="day strong"><div class="d">Miércoles</div><div class="w">Rutina B</div></div>
+      <div class="day run"><div class="d">Jueves</div><div class="w">Correr 4 km</div></div>
+      <div class="day"><div class="d">Viernes</div><div class="w">Yoga</div></div>
+      <div class="day strong"><div class="d">Sábado</div><div class="w">Rutina C</div></div>
+      <div class="day run"><div class="d">Domingo</div><div class="w">Correr 5 km</div></div>
+    </div>
+    <div class="card quiet">
+      <p>
+        Nunca dos de fuerza pegadas, y las dos corridas están separadas por tres días.
+        La corrida del domingo es tranquila y viene antes de la rutina de piernas del lunes.
+      </p>
+      <p>
+        <strong>Entrada en calor de las rutinas:</strong> 8 a 10 minutos de bici fija, suave, subiendo de a poco.
+        Sin saltos, sin soga. No se saltea.
+      </p>
+      <p>
+        <strong>Semáforo:</strong> si el peso baja otra vez, si dormís peor que tu normal,
+        si te falta energía o si la rodilla se hincha en las 24 a 48 horas después de correr,
+        pasamos a una sola corrida por semana y volvemos a tener un día libre. Sin discusión y sin culpa.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>Rutina A · Piernas y glúteo</h2>
+    <div class="session-head">
+      <span class="pill">A</span>
+      <span class="when">Lunes · 45–60 min</span>
+    </div>
+    <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Ejercicio</th><th>Series × reps</th><th>Peso</th><th>Anotá</th>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Prensa de piernas</span>
+          <span class="ex-en">Leg Press (Machine) <a href="https://www.youtube.com/results?search_query=leg+press+machine+proper+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">No bajes más allá de 90° de rodilla. Empujá con el pie entero, sin despegar los talones.</span>
+        </td>
+        <td>3 × 10-12</td>
+        <td><span class="up">50 kg</span> en total (la máquina)<br><span class="ex-note">Si después de correr la rodilla se queja, volvé a 42,5 y avisame.</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Sentadilla goblet al cajón<span class="new">NUEVO</span></span>
+          <span class="ex-en">Goblet Box Squat <a href="https://www.youtube.com/results?search_query=goblet+box+squat+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Una mancuerna sostenida con las dos manos contra el pecho. Poné un banco o cajón a la altura en que los muslos quedan paralelos al piso: tocalo con la cola, sin sentarte, y subí. Exhalá al subir.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td>Calibrá: arrancá con <strong>8 kg</strong> (una sola mancuerna)<br><span class="ex-note">Anotá el peso de esa única mancuerna.</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Hip thrust con barra</span>
+          <span class="ex-en">Barbell Hip Thrust <a href="https://www.youtube.com/results?search_query=barbell+hip+thrust+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Espalda alta apoyada en el banco, mentón metido, apretá arriba un segundo. Colchoneta entre la barra y la cadera.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td><span class="up">22,5 kg</span> en total (barra con discos)<br><span class="ex-note">Si no hay discos de 1,25, quedate en 20 y buscá 3 × 12.</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Estocada hacia atrás corta<span class="new">NUEVO</span></span>
+          <span class="ex-en">Reverse Lunge <a href="https://www.youtube.com/results?search_query=reverse+lunge+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Un paso corto hacia atrás, la rodilla de atrás baja hasta rozar el piso o hasta que la de adelante llega a 90°, lo que pase primero. Podés apoyarte de un rack. Sin caminar, sin giros.</span>
+        </td>
+        <td>2 × 8<br>por pierna</td>
+        <td>Peso corporal<br><span class="ex-note">Dos semanas sin peso. Después vemos.</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Extensión de rodilla</span>
+          <span class="ex-en">Leg Extension (Machine) <a href="https://www.youtube.com/results?search_query=leg+extension+machine+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Compará las dos piernas: si la derecha puede bastante menos, anotalo.</span>
+        </td>
+        <td>3 × 10-12</td>
+        <td><span class="up">Un escalón arriba de 35 kg</span> en total (la máquina)</td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Curl femoral</span>
+          <span class="ex-en">Lying Leg Curl (Machine) <a href="https://www.youtube.com/results?search_query=lying+leg+curl+machine+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Bajá controlado, tres segundos.</span>
+        </td>
+        <td>3 × 10-12</td>
+        <td><span class="up">Un escalón arriba de 20 kg</span> en total (la máquina)</td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Elevación de talones</span>
+          <span class="ex-en">Standing Calf Raise (Machine) <a href="https://www.youtube.com/results?search_query=standing+calf+raise+machine+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Subí hasta arriba de todo, bajá despacio hasta sentir el estiramiento. Sin rebotar. Te sirve para correr.</span>
+        </td>
+        <td>3 × 12-15</td>
+        <td><span class="up">Un escalón arriba de 65 kg</span> en total (la máquina)</td>
+        <td class="fill">___</td>
+      </tr>
+    </table>
+    </div>
+    <div class="card quiet">
+      <p>
+        Salen la abducción de cadera y la plancha lateral: las dos te quedaron chicas
+        (más de un minuto de plancha lateral contra los 30 segundos previstos) y entran
+        la sentadilla y la estocada. Si te sobran cinco minutos, la plancha lateral al final.
+      </p>
+    </div>
+    <div class="card quiet">
+      <h3>Movilidad · 5 a 7 minutos</h3>
+      <ul>
+        <li>Estiramiento de cuádriceps parada, agarrando el tobillo — 30 s por pierna</li>
+        <li>Isquiotibiales sentada en el piso, una pierna estirada — 30 s por lado</li>
+        <li>Figura 4 acostada, tirando la rodilla al pecho (glúteo) — 40 s por lado</li>
+        <li>Gemelo contra la pared, pie atrás y talón apoyado — 30 s por lado</li>
+        <li>Rodillas al pecho, acostada, meciéndote despacio — 1 minuto</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Rutina B · Empuje y brazos</h2>
+    <div class="session-head">
+      <span class="pill">B</span>
+      <span class="when">Miércoles · 45–60 min</span>
+    </div>
+    <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Ejercicio</th><th>Series × reps</th><th>Peso</th><th>Anotá</th>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Press plano con mancuernas</span>
+          <span class="ex-en">Bench Press (Dumbbell) <a href="https://www.youtube.com/results?search_query=dumbbell+bench+press+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Bajá despacio contando dos tiempos. Codos a unos 45° del cuerpo.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td><span class="up">9 kg × 2</span><br><span class="ex-note">una por mano</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Press de hombro sentada</span>
+          <span class="ex-en">Shoulder Press (Dumbbell) <a href="https://www.youtube.com/results?search_query=seated+dumbbell+shoulder+press+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Con respaldo. Costillas abajo, sin arquear la zona lumbar. Seguís en 8 kg hasta que salgan las tres series en 10, dos sesiones seguidas.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td><strong>8 kg × 2</strong><br><span class="ex-note">una por mano</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Peso muerto rumano</span>
+          <span class="ex-en">Romanian Deadlift (Dumbbell) <a href="https://www.youtube.com/results?search_query=dumbbell+romanian+deadlift+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Cola hacia atrás, espalda plana, mancuernas pegadas a la pierna. La rodilla casi no se dobla.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td><span class="up">11 kg × 2</span><br><span class="ex-note">una por mano · te salieron 12 con 9, subimos</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Elevaciones laterales</span>
+          <span class="ex-en">Lateral Raise (Dumbbell) <a href="https://www.youtube.com/results?search_query=dumbbell+lateral+raise+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Hasta la altura del hombro, no más. Seis sesiones con 4 kg: es hora.</span>
+        </td>
+        <td>3 × 10-12</td>
+        <td><span class="up">5 kg × 2</span><br><span class="ex-note">una por mano</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Extensión de tríceps en polea</span>
+          <span class="ex-en">Triceps Rope Pushdown <a href="https://www.youtube.com/results?search_query=triceps+rope+pushdown+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Codos pegados al cuerpo y quietos. Reps antes que peso: primero llegá a 12 con este.</span>
+        </td>
+        <td>3 × <span class="up">12</span></td>
+        <td><strong>10 kg</strong> en la polea</td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Curl de bíceps</span>
+          <span class="ex-en">Bicep Curl (Dumbbell) <a href="https://www.youtube.com/results?search_query=dumbbell+bicep+curl+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Sin balancear el cuerpo. Buscá llegar a 12 repeticiones antes de subir.</span>
+        </td>
+        <td>3 × 10-12</td>
+        <td><strong>6 kg × 2</strong><br><span class="ex-note">una por mano</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Bicho muerto</span>
+          <span class="ex-en">Dead Bug <a href="https://www.youtube.com/results?search_query=dead+bug+exercise+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Hacés 20 por serie sin esfuerzo: ahora lento, tres segundos para estirar cada pierna. La zona lumbar pegada al piso.</span>
+        </td>
+        <td>3 × 8-10<br>por lado</td>
+        <td>Peso corporal</td>
+        <td class="fill">___</td>
+      </tr>
+    </table>
+    </div>
+    <div class="card quiet">
+      <h3>Movilidad · 5 a 7 minutos</h3>
+      <ul>
+        <li>Pecho contra el marco de una puerta, brazo a 90° — 30 s por lado</li>
+        <li>Círculos de hombro lentos, hacia atrás — 45 s</li>
+        <li>Tríceps: mano detrás de la nuca, empujando el codo — 30 s por lado</li>
+        <li>Gato-vaca en cuatro apoyos — 1 minuto</li>
+        <li>Isquiotibiales de pie, con la rodilla apenas flexionada — 30 s por lado</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Rutina C · Espalda, brazos y abdomen</h2>
+    <div class="session-head">
+      <span class="pill">C</span>
+      <span class="when">Sábado · 45–60 min</span>
+    </div>
+    <div class="table-wrap">
+    <table>
+      <tr>
+        <th>Ejercicio</th><th>Series × reps</th><th>Peso</th><th>Anotá</th>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Remo sentada en polea</span>
+          <span class="ex-en">Seated Cable Row <a href="https://www.youtube.com/results?search_query=seated+cable+row+v+grip+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Llevá los codos hacia atrás, no las manos. Pecho arriba, sin balancear el tronco.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td><span class="up">32,5 kg</span> en total<br><span class="ex-note">o el escalón que siga a 27,5 · siete sesiones iguales</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Jalón al pecho</span>
+          <span class="ex-en">Lat Pulldown (Cable) <a href="https://www.youtube.com/results?search_query=lat+pulldown+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Tirá con la espalda, no con los brazos. Bajá hasta la clavícula sin irte hacia atrás.</span>
+        </td>
+        <td>3 × 8-10</td>
+        <td><strong>26 kg</strong> en total, la máquina nueva<br><span class="ex-note">Siempre la misma máquina y anotá cuál usaste.</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Remo con mancuerna a un brazo</span>
+          <span class="ex-en">Single Arm Dumbbell Row <a href="https://www.youtube.com/results?search_query=single+arm+dumbbell+row+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Una rodilla y una mano en el banco, espalda plana. Llevá el codo hacia la cadera.</span>
+        </td>
+        <td>3 × 8-10<br>por lado</td>
+        <td><strong>9 kg</strong> (una sola mancuerna, la del brazo que trabaja)</td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Face pull</span>
+          <span class="ex-en">Face Pull <a href="https://www.youtube.com/results?search_query=cable+face+pull+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Soga hacia la cara separando las manos, codos altos. Venís haciendo 10: buscá 12 antes de subir peso.</span>
+        </td>
+        <td>3 × 12-15</td>
+        <td><strong>15 kg</strong> en la polea</td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Curl martillo</span>
+          <span class="ex-en">Hammer Curl (Dumbbell) <a href="https://www.youtube.com/results?search_query=dumbbell+hammer+curl+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Palmas enfrentadas. Buscá 12 repeticiones antes de pasar a 6 kg.</span>
+        </td>
+        <td>3 × 10-12</td>
+        <td><strong>5 kg × 2</strong><br><span class="ex-note">una por mano</span></td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Pallof press</span>
+          <span class="ex-en">Cable Pallof Press <a href="https://www.youtube.com/results?search_query=cable+pallof+press+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">De costado a la polea, estirá los brazos al frente y aguantá sin que el cuerpo rote. Exhalá al estirar.</span>
+        </td>
+        <td>3 × 10-12<br>por lado</td>
+        <td><strong>8,75 kg</strong> en la polea</td>
+        <td class="fill">___</td>
+      </tr>
+      <tr>
+        <td>
+          <span class="ex-name">Plancha con toque de hombro<span class="new">NUEVO</span></span>
+          <span class="ex-en">Plank Shoulder Tap <a href="https://www.youtube.com/results?search_query=plank+shoulder+tap+form" target="_blank" rel="noopener">YouTube ▸</a></span>
+          <span class="ex-note">Reemplaza a la plancha con peso, que nunca usaste con peso: la plancha quieta ya te queda corta (más de un minuto). Pies más abiertos, la cadera no se mueve.</span>
+        </td>
+        <td>3 × 10<br>por lado</td>
+        <td>Peso corporal</td>
+        <td class="fill">___</td>
+      </tr>
+    </table>
+    </div>
+    <div class="card quiet">
+      <h3>Movilidad · 5 a 7 minutos</h3>
+      <ul>
+        <li>Colgarse de la barra del jalón con los pies apoyados, soltando la espalda — 30 s × 2</li>
+        <li>Estiramiento de dorsal: brazo estirado apoyado en algo bajo, cadera hacia atrás — 30 s por lado</li>
+        <li>Rotación de columna sentada, girando hacia cada lado — 30 s por lado</li>
+        <li>Cuello: oreja al hombro, suave — 20 s por lado</li>
+        <li>Gato-vaca en cuatro apoyos — 1 minuto</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Las dos corridas</h2>
+
+    <div class="session-head">
+      <span class="pill run">Correr 1</span>
+      <span class="when">Jueves · 4 km</span>
+    </div>
+    <div class="session-head">
+      <span class="pill run">Correr 2</span>
+      <span class="when">Domingo · 5 km</span>
+    </div>
+
+    <div class="card green">
+      <h3>Cómo se corre</h3>
+      <ul>
+        <li><strong>Ritmo conversacional:</strong> que puedas hablar sin cortar las frases. Si no podés, andá más despacio.</li>
+        <li><strong>Sin series, sin cuestas, sin sprints.</strong> Lo más plano y parejo que tengas a mano.</li>
+        <li><strong>Entrada en calor:</strong> 5 minutos de caminata rápida y después 2 minutos de movilidad dinámica (balanceo de piernas adelante y atrás, círculos de cadera). Sin saltos ni soga.</li>
+        <li><strong>La semana que viene:</strong> un kilómetro más como máximo en cada una. El tope es 6.</li>
+        <li><strong>Después:</strong> 5 minutos caminando y la movilidad de abajo. Comé algo con proteína dentro de la hora.</li>
+      </ul>
+    </div>
+
+    <div class="card quiet">
+      <h3>Movilidad después de correr · 5 a 7 minutos</h3>
+      <ul>
+        <li>Gemelo contra la pared, talón apoyado — 30 s por lado</li>
+        <li>Cuádriceps parada, agarrando el tobillo — 30 s por pierna</li>
+        <li>Flexor de cadera en media rodilla (la rodilla de atrás sobre una colchoneta) — 30 s por lado</li>
+        <li>Figura 4 acostada (glúteo) — 40 s por lado</li>
+        <li>Rodillas al pecho, acostada — 1 minuto</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h3>Una sola cosa que anotar</h3>
+      <p>
+        Después de cada corrida, mirá la rodilla derecha al día siguiente y al otro.
+        Si no se hinchó, no hace falta que me cuentes nada. Si se hinchó o dolió, avisame antes de la siguiente.
+      </p>
+    </div>
+  </section>
+
+  <section>
+    <h2>La comida</h2>
+
+    <div class="big-idea">
+      <div class="label">El foco de la semana</div>
+      <p>
+        Estás corriendo, levantando y haciendo yoga: el cuerpo necesita <strong>más</strong>,
+        no lo mismo. Las cuatro anclas de proteína siguen, y se suma una cosa.
+      </p>
+    </div>
+
+    <div class="card green">
+      <h3>Los días de correr (jueves y domingo)</h3>
+      <p>
+        La merienda es una comida de verdad, con un hidrato y una proteína, y el dulce de la tarde se queda donde está.
+        Ejemplos: tostadas con cottage y miel, yogur griego con banana y granola, o un sándwich de queso con mate.
+        Y después de correr, algo de proteína dentro de la hora: un yogur o un huevo duro con pan.
+      </p>
+    </div>
+
+    <div class="card quiet">
+      <p>
+        La cena sigue a las 21:00 o más tarde, y el plan cuenta con eso. Esta semana,
+        cenas nuevas, distintas a las de la semana 2:
+      </p>
+    </div>
+
+    <div class="anchors">
+      <div class="anchor">
+        <div class="when">Cena 1</div>
+        <div class="what">Pescado blanco al horno con papas, tomate y aceitunas</div>
+        <div class="g">~30 g</div>
+      </div>
+      <div class="anchor">
+        <div class="when">Cena 2</div>
+        <div class="what">Guiso de lentejas con huevo poché y yogur con limón</div>
+        <div class="g">~27 g</div>
+      </div>
+      <div class="anchor">
+        <div class="when">Cena 3</div>
+        <div class="what">Panqueques salados de espinaca con cottage y champiñones</div>
+        <div class="g">~26 g</div>
+      </div>
+      <div class="anchor">
+        <div class="when">Cena 4</div>
+        <div class="what">Hamburguesas de atún y papa con ensalada y labane</div>
+        <div class="g">~30 g</div>
+      </div>
+      <div class="anchor">
+        <div class="when">Cena 5</div>
+        <div class="what">Tostado de atún y queso con ensalada de tomate y pepino</div>
+        <div class="g">~32 g</div>
+      </div>
+    </div>
+
+    <div class="card green">
+      <h3>Cómo se hacen, en dos líneas cada una</h3>
+      <ul>
+        <li><strong>Pescado al horno:</strong> filet de pescado blanco sobre papas en rodajas finas, tomate en gajos y aceitunas. 20 minutos a 200°, limón y aceite de oliva por encima.</li>
+        <li><strong>Guiso de lentejas:</strong> lentejas con cebolla, zanahoria, ajo y comino, 25 minutos. Encima un huevo poché y una cucharada de yogur con limón.</li>
+        <li><strong>Panqueques:</strong> masa de huevo, leche y harina, finitos. Relleno de espinaca salteada, cottage y champiñones; doblados y 3 minutos en la sartén.</li>
+        <li><strong>Hamburguesas:</strong> dos latas de atún escurridas, una papa hervida pisada, un huevo y perejil. Se forman y se doran a la sartén. Labane con ajo al lado.</li>
+        <li><strong>Tostado:</strong> pan con atún, queso y tomate, a la plancha o a la sandwichera. Ensalada aparte. Para la noche en que llegás sin ganas de cocinar.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <h2>Lo que necesito de vos</h2>
+    <div class="card">
+      <ol>
+        <li><strong>Pedile a tu kinesióloga que te lo deje por escrito:</strong> cuántos kilómetros por salida, cuántas veces por semana, y hasta qué ángulo de rodilla podés cargar. Con eso decidimos lo que sigue.</li>
+        <li><strong>El peso de la semana,</strong> el promedio de las mañanas si lo tenés. Alcanza con un número.</li>
+      </ol>
+      <p>
+        Lo demás lo leo de Hevy. Si algo te llama la atención en la rodilla, avisame cuando quieras.
+      </p>
+    </div>
+    <div class="card quiet">
+      <h3>Si llegás muerta a una sesión</h3>
+      <p>
+        Los tres primeros ejercicios del bloque, dos series cada uno. Veinticinco minutos y listo.
+        Si es un día de correr, caminá media hora tranquila.
+        Media sesión anotada vale muchísimo más que una sesión completa que no ocurrió.
+      </p>
+    </div>
+  </section>
+
+  <div class="footer">
+    Semana 3 · escrita el 12 de octubre de 2026<br>
+    Valeria, con Flor, Lucía y Sofía
+  </div>
+
+</div>
+
+</body>
+</html>
